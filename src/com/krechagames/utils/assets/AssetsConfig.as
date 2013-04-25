@@ -8,37 +8,6 @@
  * Date: 18.12.2012
  * Time: 15:16
  */
-/*
-<!-- example file assets.xml -->
- <?xml version="1.0" encoding="utf-8" ?>
- <data>
- <group name="common">
- <asset id="db" url="assets/data/db.csv" type="text" />
- <asset id="lang" url="assets/data/lang.xml" type="text" />
- <asset id="music" url="assets/sounds/music.mp3" type="sound" />
- </group>
-
- <group name="x1">
- <asset id="bg" url="assets/textures/bg@x1.jpg" type="image" />
- <asset id="logotype" url="assets/textures/logotype@x1.jpg" type="image" />
-
- <asset id="atlas" url="assets/textures/atlas@x1.png" type="image" />
- <asset id="atlas_xml" url="assets/textures/atlas@x1.xml" type="text" />
-
- <asset id="compressed_texture" url="assets/textures/compressed_texture@x1.atf" type="raw" />
- </group>
-
- <group name="x2">
- <asset id="bg" url="assets/textures/bg@x2.jpg" type="image" />
- <asset id="logotype" url="assets/textures/logotype@x2.jpg" type="image" />
-
- <asset id="atlas" url="assets/textures/atlas@x2.png" type="image" />
- <asset id="atlas_xml" url="assets/textures/atlas@x2.xml" type="text" />
-
- <asset id="compressed_texture" url="assets/textures/compressed_texture@x2.atf" type="raw" />
- </group>
- </data>
-*/
 package com.krechagames.utils.assets {
 	import com.krechagames.utils.assets.interfaces.IAsset;
 	import com.krechagames.utils.assets.loaders.concrete.ImageAsset;

@@ -19,8 +19,12 @@ package com.krechagames.utils.assets.loaders.concrete {
 	import flash.events.ProgressEvent;
 	import flash.events.SecurityErrorEvent;
 	import flash.net.URLRequest;
+	import flash.net.URLRequestMethod;
+	import flash.net.URLVariables;
+	import flash.net.URLVariables;
 	import flash.system.ImageDecodingPolicy;
 	import flash.system.LoaderContext;
+	import flash.system.SecurityDomain;
 
 	public class ImageAsset extends Asset {
 		protected var loader:Loader;
@@ -35,16 +39,17 @@ package com.krechagames.utils.assets.loaders.concrete {
 			dispatchEvent(event);
 		}
 
-		override public function load():void {
+		override public function load(version:int = 0):void {
 			var loaderContext:LoaderContext = new LoaderContext();
 			loaderContext.imageDecodingPolicy = ImageDecodingPolicy.ON_LOAD;
+			loaderContext.securityDomain = SecurityDomain.currentDomain;
 
 			loader.contentLoaderInfo.addEventListener(Event.COMPLETE, loadEventHandler);
 			loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, loadEventHandler);
 			loader.contentLoaderInfo.addEventListener(SecurityErrorEvent.SECURITY_ERROR, loadEventHandler);
 			loader.contentLoaderInfo.addEventListener(ProgressEvent.PROGRESS, loadEventHandler);
 
-			loader.load(new URLRequest(url), loaderContext);
+			loader.load(new URLRequest(url + "?v="+version), loaderContext);
 		}
 
 		override public function dispose():void {

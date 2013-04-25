@@ -29,11 +29,16 @@ package com.krechagames.utils.assets {
 
 		public var scale:Number;
 
+		public var generateMipMaps:Boolean;
+		public var optimizeForRenderTexture:Boolean;
+
 		public function StarlingStorage(scale:Number = 1) {
 			this.scale = scale;
 
 			this.atlasStorage = new Dictionary(true);
 			this.fontStorage = new Dictionary(true);
+			this.generateMipMaps = true;
+			this.optimizeForRenderTexture = false;
 		}
 
 		public function prepareAtlas(atlasName:String, atlasXML:String = null, disposeAssets:Boolean = true):TextureAtlas {
@@ -45,7 +50,7 @@ package com.krechagames.utils.assets {
 				if (asset is RawDataAsset) {				
 					texture = Texture.fromAtfData(RawDataAsset(asset).castBytes, scale);
 				}else {
-					texture = Texture.fromBitmap(ImageAsset(asset).castBitmap, true, false, scale);
+					texture = Texture.fromBitmap(ImageAsset(asset).castBitmap, generateMipMaps, optimizeForRenderTexture, scale);
 				}
 
 				var atlas:TextureAtlas = new TextureAtlas( texture,

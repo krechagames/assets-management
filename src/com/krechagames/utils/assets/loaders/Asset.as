@@ -48,7 +48,7 @@ package com.krechagames.utils.assets.loaders {
 			throw new IllegalOperationError("Error: dispose() is an abstract method. Overwrite it in concrete class.");
 		}
 
-		public function load():void {
+		public function load(version:int = 0):void {
 			throw new IllegalOperationError("Error: load() is an abstract method. Overwrite it in concrete class.");
 		}
 

@@ -29,6 +29,8 @@ package com.krechagames.utils.assets {
 
 		public var autoSkip:Boolean = false;
 
+		public var version:int = 0;
+
 		public function AssetsLoader(storage:IAssetsStorage) {
 			this._queue = new Vector.<IAsset>();
 			this._storage = storage
@@ -63,7 +65,7 @@ package com.krechagames.utils.assets {
 			asset.addEventListener(Event.COMPLETE, loadCompleteHandler, false, 0, true);
 			asset.addEventListener(IOErrorEvent.IO_ERROR, loadErrorHandler, false, 0, true);
 			asset.addEventListener(SecurityErrorEvent.SECURITY_ERROR, loadErrorHandler, false, 0, true);
-			asset.load();
+			asset.load(version);
 		}
 
 		protected function skip():void {

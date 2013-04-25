@@ -23,6 +23,7 @@ package com.krechagames.utils.assets.loaders.concrete {
 
 		public function SoundAsset(id:String = null, url:String = null) {
 			super(id, url);
+
 			loader = new Sound();
 		}
 
@@ -30,13 +31,13 @@ package com.krechagames.utils.assets.loaders.concrete {
 			dispatchEvent(event);
 		}
 
-		override public function load():void {
+		override public function load(version:int = 0):void {
 			loader.addEventListener(Event.COMPLETE, loadEventHandler);
 			loader.addEventListener(IOErrorEvent.IO_ERROR, loadEventHandler);
 			loader.addEventListener(SecurityErrorEvent.SECURITY_ERROR, loadEventHandler);
 			loader.addEventListener(ProgressEvent.PROGRESS, loadEventHandler);
 
-			loader.load(new URLRequest(url));
+			loader.load(new URLRequest(url + "?v="+version));
 		}
 
 		override public function dispose():void {
