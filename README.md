@@ -2,6 +2,9 @@ assets-management
 =================
 Load and store assets (also for Starling). Manager assets in your project. Load and store any type of asset, prepare loaded file to use in IAssetsStorage class (create own storage like StarlingStorage).
 
+Full description and manual here:
+http://blog.krecha-games.com/assets-management/
+
 example (native flash)
 ======================
 This is the most simpliest use of AssetsManager. In this example we use external assets manifest assets.xml (below) to describe which file you want to load and what type are they.
