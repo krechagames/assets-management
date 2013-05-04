@@ -16,13 +16,10 @@ var storage:IAssetsStorage = new AssetsStorage();
 //load assets
 var loader:AssetsLoader = new AssetsLoader(storage);
 loader.addEventListener(Event.COMPLETE, loadAssetsCompleteHandler, false, 0, true);
-loader.addEventListener(IOErrorEvent.IO_ERROR, loadErrorHandler, false, 0, true);
 
 //(optional) load assets.xml with assets manifest
 var config:AssetsConfig = new AssetsConfig("config", "./assets/assets.xml", null);
 config.addEventListener(Event.COMPLETE, loadConfigCompleteHandler, false, 0, true);
-config.addEventListener(IOErrorEvent.IO_ERROR, loadErrorHandler, false, 0, true);
-config.addEventListener(SecurityErrorEvent.SECURITY_ERROR, loadErrorHandler, false, 0, true);
 config.load();
 
 //1. Load assets.xml complete, load assets from manifest
@@ -35,31 +32,22 @@ function loadAssets(list:Vector.<IAsset>):void {
   loader.load(list);
 }
 
-//3a. Load assets complete, do whatever you want to do with. AssetsLoader's job is done!
+//3. Load assets complete, do whatever you want to do with. AssetsLoader's job is done!
 function loadAssetsCompleteHandler(event:Event):void {
 	var bg:Bitmap = ImageAsset(storage.getAsset("bg")).castBitmap;
 
 	var logotype:Bitmap = ImageAsset(storage.getAsset("logotype")).castBitmap;
 
 	var music:Sound = SoundAsset(storage.getAsset("music")).castSound;
-
-}
-
-//3b. Error, asset not found!
-function loadErrorHandler(event:ErrorEvent):void {
-	trace("Error: ", event);
 }
 
 //Dispose all objects
 function dispose():void {
 	config.dispose();
 	config.removeEventListener(Event.COMPLETE, loadConfigCompleteHandler);
-	config.removeEventListener(IOErrorEvent.IO_ERROR, loadErrorHandler);
-	config.removeEventListener(SecurityErrorEvent.SECURITY_ERROR, loadErrorHandler);
 	config = null;
 
 	loader.removeEventListener(Event.COMPLETE, loadAssetsCompleteHandler);
-	loader.removeEventListener(IOErrorEvent.IO_ERROR, loadErrorHandler);
 	loader = null;
 
 	storage.dispose();
