@@ -47,6 +47,10 @@ package com.krechagames.utils.assets {
 
 		protected function loadCompleteHandler(e:Event):void {
 			var asset:IAsset = IAsset(e.currentTarget);
+			asset.removeEventListener(Event.COMPLETE, loadCompleteHandler);
+			asset.removeEventListener(IOErrorEvent.IO_ERROR, loadErrorHandler);
+			asset.removeEventListener(SecurityErrorEvent.SECURITY_ERROR, loadErrorHandler);
+
 			storage.setAsset(asset);
 
 			_queue.shift();
@@ -55,6 +59,11 @@ package com.krechagames.utils.assets {
 		}
 
 		protected function loadErrorHandler(e:Event):void {
+			var asset:IAsset = IAsset(e.currentTarget);
+			asset.removeEventListener(Event.COMPLETE, loadCompleteHandler);
+			asset.removeEventListener(IOErrorEvent.IO_ERROR, loadErrorHandler);
+			asset.removeEventListener(SecurityErrorEvent.SECURITY_ERROR, loadErrorHandler);
+			
 			dispatchEvent(new IOErrorEvent("An error occuring loading asset " + current.url + (autoSkip ? ". Skip to next asset." : ".")));
 			if(autoSkip) skip();
 		}
@@ -62,9 +71,9 @@ package com.krechagames.utils.assets {
 		protected function loadCurrent():void {
 			var asset:IAsset = current;
 
-			asset.addEventListener(Event.COMPLETE, loadCompleteHandler, false, 0, true);
-			asset.addEventListener(IOErrorEvent.IO_ERROR, loadErrorHandler, false, 0, true);
-			asset.addEventListener(SecurityErrorEvent.SECURITY_ERROR, loadErrorHandler, false, 0, true);
+			asset.addEventListener(Event.COMPLETE, loadCompleteHandler);
+			asset.addEventListener(IOErrorEvent.IO_ERROR, loadErrorHandler);
+			asset.addEventListener(SecurityErrorEvent.SECURITY_ERROR, loadErrorHandler);
 			asset.load(version);
 		}
 
