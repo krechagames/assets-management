@@ -16,6 +16,8 @@ package com.krechagames.utils.assets.interfaces {
 		function set id(value:String):void;
 		function get url():String;
 		function set url(value:String):void;
+		function get group():String;
+		function set group(value:String):void;
 		function load(version:int = 0):void;
 		function dispose():void;
 	}

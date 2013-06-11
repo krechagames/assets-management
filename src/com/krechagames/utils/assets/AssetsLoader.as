@@ -63,7 +63,7 @@ package com.krechagames.utils.assets {
 			asset.removeEventListener(Event.COMPLETE, loadCompleteHandler);
 			asset.removeEventListener(IOErrorEvent.IO_ERROR, loadErrorHandler);
 			asset.removeEventListener(SecurityErrorEvent.SECURITY_ERROR, loadErrorHandler);
-			
+
 			dispatchEvent(new IOErrorEvent("An error occuring loading asset " + current.url + (autoSkip ? ". Skip to next asset." : ".")));
 			if(autoSkip) skip();
 		}

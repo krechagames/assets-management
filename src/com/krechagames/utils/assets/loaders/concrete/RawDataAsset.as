@@ -23,8 +23,8 @@ package com.krechagames.utils.assets.loaders.concrete {
 	public class RawDataAsset extends Asset {
 		protected var loader:URLLoader;
 
-		public function RawDataAsset(id:String = null, url:String = null) {
-			super(id, url);
+		public function RawDataAsset(id:String = null, url:String = null, group:String = null) {
+			super(id, url, group);
 
 			loader = new URLLoader();
 			loader.dataFormat = URLLoaderDataFormat.BINARY;

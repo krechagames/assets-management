@@ -81,6 +81,7 @@ package com.krechagames.utils.assets {
 						asset = createAsset(group.asset[j].@type);
 						asset.id = group.asset[j].@id;
 						asset.url = group.asset[j].@url;
+						asset.group = group.@name;
 
 						_list.push(asset);
 					}

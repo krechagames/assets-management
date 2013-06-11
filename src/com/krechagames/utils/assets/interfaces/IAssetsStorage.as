@@ -13,6 +13,8 @@ package com.krechagames.utils.assets.interfaces {
 		function setAsset(asset:IAsset):void;
 		function getAsset(id:String):IAsset;
 		function removeAsset(id:String):void;
+		function getGroup(name:String):Vector.<IAsset>;
+		function removeGroup(name:String):void
 		function dispose():void;
 	}
 }

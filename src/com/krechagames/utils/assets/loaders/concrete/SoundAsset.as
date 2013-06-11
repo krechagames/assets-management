@@ -21,8 +21,8 @@ package com.krechagames.utils.assets.loaders.concrete {
 	public class SoundAsset extends Asset {
 		protected var loader:Sound;
 
-		public function SoundAsset(id:String = null, url:String = null) {
-			super(id, url);
+		public function SoundAsset(id:String = null, url:String = null, group:String = null) {
+			super(id, url, group);
 
 			loader = new Sound();
 		}

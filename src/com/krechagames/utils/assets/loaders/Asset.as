@@ -23,9 +23,12 @@ package com.krechagames.utils.assets.loaders {
 
 		private var _url:String;
 
-		public function Asset(id:String = null, url:String = null) {
+		private var _group:String;
+
+		public function Asset(id:String = null, url:String = null, group:String = null) {
 			this.id = id;
 			this.url = url;
+			this.group = group;
 		}
 
 		public function get id():String {
@@ -42,6 +45,14 @@ package com.krechagames.utils.assets.loaders {
 
 		public function set url(value:String):void {
 			_url = value;
+		}
+
+		public function get group():String {
+			return _group;
+		}
+
+		public function set group(value:String):void {
+			_group = value;
 		}
 
 		public function dispose():void {

@@ -22,8 +22,8 @@ package com.krechagames.utils.assets.loaders.concrete {
 	public class TextAsset extends Asset {
 		protected var loader:URLLoader;
 
-		public function TextAsset(id:String = null, url:String = null) {
-			super(id, url);
+		public function TextAsset(id:String = null, url:String = null, group:String = null) {
+			super(id, url, group);
 
 			loader = new URLLoader();
 			loader.dataFormat = URLLoaderDataFormat.TEXT;
