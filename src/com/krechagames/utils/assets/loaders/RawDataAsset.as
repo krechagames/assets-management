@@ -6,25 +6,29 @@
  * Created with IntelliJ IDEA.
  * User: swiezy
  * Date: 18.12.2012
- * Time: 13:46
+ * Time: 12:31
  */
-package com.krechagames.utils.assets.loaders.concrete {
-	import com.krechagames.utils.assets.loaders.*;
+package com.krechagames.utils.assets.loaders {
+	import com.krechagames.utils.assets.Asset;
 
 	import flash.events.Event;
 	import flash.events.IOErrorEvent;
 	import flash.events.ProgressEvent;
 	import flash.events.SecurityErrorEvent;
-	import flash.media.Sound;
+	import flash.net.URLLoader;
+	import flash.net.URLLoaderDataFormat;
 	import flash.net.URLRequest;
+	import flash.utils.ByteArray;
 
-	public class SoundAsset extends Asset {
-		protected var loader:Sound;
+	public class RawDataAsset extends Asset {
+		protected var loader:URLLoader;
 
-		public function SoundAsset(id:String = null, url:String = null, group:String = null) {
+		public function RawDataAsset(id:String = null, url:String = null, group:String = null) {
 			super(id, url, group);
 
-			loader = new Sound();
+			loader = new URLLoader();
+			loader.dataFormat = URLLoaderDataFormat.BINARY;
+
 		}
 
 		protected function loadEventHandler(event:Event):void {
@@ -47,7 +51,8 @@ package com.krechagames.utils.assets.loaders.concrete {
 			loader.removeEventListener(ProgressEvent.PROGRESS, loadEventHandler);
 
 			try {
-				loader.close();
+				loader.close ();
+				ByteArray (loader.data).clear ();
 			}catch(e:Error){}
 
 			loader = null;
@@ -55,8 +60,8 @@ package com.krechagames.utils.assets.loaders.concrete {
 			dispatchEvent(new Event(Event.REMOVED))
 		}
 
-		public function get castSound():Sound {
-			return loader;
+		public function get castBytes():ByteArray {
+			return loader.data as ByteArray;
 		}
 	}
 }

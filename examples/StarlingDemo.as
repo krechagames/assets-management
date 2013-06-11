@@ -9,8 +9,7 @@ package {
 	import com.krechagames.utils.assets.AssetsLoader;
 	import com.krechagames.utils.assets.StarlingStorage;
 	import com.krechagames.utils.assets.interfaces.IAsset;
-	import com.krechagames.utils.assets.loaders.concrete.SoundAsset;
-	import com.krechagames.utils.assets.loaders.concrete.TextAsset;
+	import com.krechagames.utils.assets.loaders.*;
 
 	import flash.events.ErrorEvent;
 	import flash.events.Event;
@@ -80,10 +79,10 @@ package {
 		 */
 		private function loadAssetsCompleteHandler(event:flash.events.Event):void {
 			//prepare atlases and dispose assets
-			storage.prepareAtlas("atlas", "atlas_xml", true);
-			storage.prepareAtlas("compressed_texture", null, true);
-			storage.prepareAtlas("bg", null, true);
-			storage.prepareAtlas("logotype", null, true);
+			storage.prepareAtlas("atlas", "atlas_xml");
+			storage.prepareAtlas("compressed_texture", null);
+			storage.prepareAtlas("bg", null);
+			storage.prepareAtlas("logotype", null);
 
 			//images assets
 			var bg:Image = new Image(storage.getTexture("bg"));

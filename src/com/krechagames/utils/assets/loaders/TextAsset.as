@@ -8,8 +8,8 @@
  * Date: 18.12.2012
  * Time: 13:27
  */
-package com.krechagames.utils.assets.loaders.concrete {
-	import com.krechagames.utils.assets.loaders.*;
+package com.krechagames.utils.assets.loaders {
+	import com.krechagames.utils.assets.Asset;
 
 	import flash.events.Event;
 	import flash.events.IOErrorEvent;

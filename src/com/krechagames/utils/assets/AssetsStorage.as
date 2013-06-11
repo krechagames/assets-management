@@ -11,7 +11,6 @@
 package com.krechagames.utils.assets {
 	import com.krechagames.utils.assets.interfaces.IAsset;
 	import com.krechagames.utils.assets.interfaces.IAssetsStorage;
-	import com.krechagames.utils.assets.loaders.Asset;
 
 	import flash.events.Event;
 	import flash.utils.Dictionary;

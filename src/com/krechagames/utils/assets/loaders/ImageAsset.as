@@ -8,8 +8,8 @@
  * Date: 18.12.2012
  * Time: 13:22
  */
-package com.krechagames.utils.assets.loaders.concrete {
-	import com.krechagames.utils.assets.loaders.*;
+package com.krechagames.utils.assets.loaders {
+	import com.krechagames.utils.assets.Asset;
 
 	import flash.display.Bitmap;
 	import flash.display.Loader;
@@ -19,9 +19,6 @@ package com.krechagames.utils.assets.loaders.concrete {
 	import flash.events.ProgressEvent;
 	import flash.events.SecurityErrorEvent;
 	import flash.net.URLRequest;
-	import flash.net.URLRequestMethod;
-	import flash.net.URLVariables;
-	import flash.net.URLVariables;
 	import flash.system.ImageDecodingPolicy;
 	import flash.system.LoaderContext;
 

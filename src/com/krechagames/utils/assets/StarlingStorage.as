@@ -10,12 +10,13 @@
  */
 package com.krechagames.utils.assets {
 	import com.krechagames.utils.assets.interfaces.IAsset;
-	import com.krechagames.utils.assets.loaders.concrete.ImageAsset;
-	import com.krechagames.utils.assets.loaders.concrete.RawDataAsset;
-	import com.krechagames.utils.assets.loaders.concrete.TextAsset;
+	import com.krechagames.utils.assets.loaders.ImageAsset;
+	import com.krechagames.utils.assets.loaders.RawDataAsset;
+	import com.krechagames.utils.assets.loaders.TextAsset;
+	import com.krechagames.utils.assets.storage.StarlingAtlasAsset;
+	import com.krechagames.utils.assets.storage.StarlingFontAsset;
 
 	import flash.geom.Rectangle;
-	import flash.utils.Dictionary;
 
 	import starling.text.BitmapFont;
 	import starling.text.TextField;
@@ -23,10 +24,6 @@ package com.krechagames.utils.assets {
 	import starling.textures.TextureAtlas;
 
 	public class StarlingStorage extends AssetsStorage {
-		protected var atlasStorage:Dictionary;
-
-		protected var fontStorage:Dictionary;
-
 		public var scale:Number;
 
 		public var generateMipMaps:Boolean;
@@ -35,13 +32,11 @@ package com.krechagames.utils.assets {
 		public function StarlingStorage(scale:Number = 1) {
 			this.scale = scale;
 
-			this.atlasStorage = new Dictionary(true);
-			this.fontStorage = new Dictionary(true);
 			this.generateMipMaps = true;
 			this.optimizeForRenderTexture = false;
 		}
 
-		public function prepareAtlas(atlasName:String, atlasXML:String = null, disposeAssets:Boolean = true):TextureAtlas {
+		public function prepareAtlas(atlasName:String, atlasXML:String = null):TextureAtlas {
 			if (!hasAtlas (atlasName)) {
 				var texture:Texture;
 
@@ -59,43 +54,41 @@ package com.krechagames.utils.assets {
 
 				atlas.addRegion(atlasName, new Rectangle(0, 0, texture.nativeWidth/scale, texture.nativeHeight/scale));
 
-				atlasStorage[atlasName] = atlas;
+				if ( atlasXML ) removeAsset(atlasXML);
+				removeAsset(atlasName)
 
-				if(disposeAssets){
-					if ( atlasXML ) removeAsset(atlasXML);
-					removeAsset(atlasName)
-				}
-			}		
+				setAsset(new StarlingAtlasAsset(atlasName, asset.group, atlas))
+			}
 			return getAtlas(atlasName);
 		}
 
-		public function prepareFont( texture:Texture, fontXML:String, disposeAssets:Boolean = true):BitmapFont {
-			var font:BitmapFont = new BitmapFont (texture, TextAsset (getAsset (fontXML)).castXML);
+		public function prepareFont( texture:Texture, fontXML:String):BitmapFont {
+			var asset:TextAsset = TextAsset (getAsset (fontXML));
+
+			var font:BitmapFont = new BitmapFont (texture, asset.castXML);
 			TextField.registerBitmapFont (font);
 			
-			fontStorage[font.name] = font;
+			removeAsset(fontXML);
 
-			if(disposeAssets){
-				removeAsset(fontXML);
-			}
+			setAsset(new StarlingFontAsset(font.name, asset.group, font))
 
 			return getBitmapFont(font.name);
 		}
 
 		public function hasAtlas(name:String):Boolean {
-			return !(atlasStorage[name] == null);
+			return !(hasAsset(name) == null) && getAsset(name) is StarlingAtlasAsset;
 		}
 
 		public function hasFont(name:String):Boolean {
-			return !(fontStorage[name] == null);
+			return !(hasAsset(name) == null) && getAsset(name) is StarlingFontAsset;
 		}
 
 		public function getBitmapFont(fontName:String):BitmapFont {
-			return hasFont(fontName) ? BitmapFont(fontStorage[fontName]) : null;
+			return hasFont(fontName) ? StarlingFontAsset(getAsset(fontName)).castFont : null;
 		}
 
 		public function getAtlas(atlasName:String):TextureAtlas {
-			return hasAtlas(atlasName) ? TextureAtlas(atlasStorage[atlasName]) : null;
+			return hasAtlas(atlasName) ? StarlingAtlasAsset(getAsset(atlasName)).castAtlas : null;
 		}
 
 		public function getTexture(atlasName:String, textureName:String = null):Texture {
@@ -104,25 +97,6 @@ package com.krechagames.utils.assets {
 
 		public function getTextures(atlasName:String, texturesName:String):Vector.<Texture> {
 			return hasAtlas(atlasName) ? getAtlas(atlasName).getTextures(texturesName) : null;
-		}
-
-		override public function dispose():void {
-			var i:String;
-
-			for(i in fontStorage){
-				TextField.unregisterBitmapFont(BitmapFont(fontStorage[i]).name, true);
-				BitmapFont(fontStorage[i]).dispose();
-
-				delete fontStorage[i];
-			}
-
-			for(i in atlasStorage){
-				TextureAtlas(atlasStorage[i]).dispose();
-
-				delete atlasStorage[i];
-			}
-
-			super.dispose();
 		}
 	}
 }

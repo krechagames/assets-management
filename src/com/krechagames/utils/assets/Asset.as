@@ -8,7 +8,7 @@
  * Date: 18.12.2012
  * Time: 13:33
  */
-package com.krechagames.utils.assets.loaders {
+package com.krechagames.utils.assets {
 	import com.krechagames.utils.assets.interfaces.IAsset;
 
 	import flash.errors.IllegalOperationError;

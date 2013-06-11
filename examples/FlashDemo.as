@@ -10,8 +10,7 @@ package  {
 	import com.krechagames.utils.assets.AssetsStorage;
 	import com.krechagames.utils.assets.interfaces.IAsset;
 	import com.krechagames.utils.assets.interfaces.IAssetsStorage;
-	import com.krechagames.utils.assets.loaders.concrete.ImageAsset;
-	import com.krechagames.utils.assets.loaders.concrete.SoundAsset;
+	import com.krechagames.utils.assets.loaders.*;
 
 	import flash.display.Bitmap;
 	import flash.display.Sprite;

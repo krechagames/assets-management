@@ -10,10 +10,10 @@
  */
 package com.krechagames.utils.assets {
 	import com.krechagames.utils.assets.interfaces.IAsset;
-	import com.krechagames.utils.assets.loaders.concrete.ImageAsset;
-	import com.krechagames.utils.assets.loaders.concrete.RawDataAsset;
-	import com.krechagames.utils.assets.loaders.concrete.SoundAsset;
-	import com.krechagames.utils.assets.loaders.concrete.TextAsset;
+	import com.krechagames.utils.assets.loaders.ImageAsset;
+	import com.krechagames.utils.assets.loaders.RawDataAsset;
+	import com.krechagames.utils.assets.loaders.SoundAsset;
+	import com.krechagames.utils.assets.loaders.TextAsset;
 
 	import flash.errors.IOError;
 	import flash.events.Event;
