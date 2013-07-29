@@ -2,7 +2,6 @@
  * Created with IntelliJ IDEA.
  * User: swiezy
  * Date: 17.04.2013
- * Time: 16:55
  */
 package  {
 	import com.krechagames.utils.assets.AssetsConfig;
